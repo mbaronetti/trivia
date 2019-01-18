@@ -1,0 +1,65 @@
+@import url(~antd/dist/antd.css);
+.App {
+  text-align: center; }
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin; }
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white; }
+
+.App-link {
+  color: #61dafb; }
+
+.board {
+  margin-top: 25px; }
+  .board .board-button {
+    margin: 20px 10px 0 10px; }
+  .board ul {
+    list-style-type: none;
+    padding: 0; }
+    .board ul li {
+      text-align: left;
+      margin-bottom: 5px; }
+      .board ul li span {
+        margin-left: 10px; }
+
+.valid {
+  color: #2ecc71; }
+
+.invalid {
+  color: #e74c3c; }
+
+.bold {
+  font-weight: bold; }
+
+.d-none {
+  display: none; }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+.app-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e0e0e0;
+  padding-top: 100px;
+  z-index: 9; }
+
+.d-none {
+  display: none; }
+
+/*# sourceMappingURL=styles.css.map */
