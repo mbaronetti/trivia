@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {incrementCounter, decrementCounter, resetCounter, setData, setDataLength, setCurrentQuestion, answerValid, answerInvalid, appDidLoad, setResult, endTrivia} from '../js/actions/actions';
+import {incrementCounter, setData, setDataLength, setCurrentQuestion, answerValid, answerInvalid, appDidLoad, setResult, endTrivia, setTitle, startTrivia} from '../js/actions/actions';
 import {Button, Icon, Card, Progress} from 'antd';
 import './../styles.css';
 import uuidv1 from 'uuid';
@@ -19,14 +19,15 @@ const mapStateToProps = (state) => {
         appLoaded: state.appLoaded,
         currentDifficulty: state.currentDifficulty,
         results: state.results,
-        showResults: state.showResults
+        showResults: state.showResults,
+        currentTitle: state.currentTitle,
+        triviaStarted: state.triviaStarted
+        
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return{
         incrementCounter: (counterVal,val) => dispatch(incrementCounter(counterVal,val)),
-        decrementCounter: (counterVal,val) => dispatch(decrementCounter(counterVal,val)),
-        resetCounter: () => dispatch(resetCounter()),
         setData: (data) => dispatch(setData(data)),
         setDataLength: (val) => dispatch(setDataLength(val)),
         setCurrentQuestion: (val) => dispatch(setCurrentQuestion(val)),
@@ -34,7 +35,9 @@ const mapDispatchToProps = (dispatch) => {
         answerInvalid: () => dispatch(answerInvalid()),
         appDidLoad: (val) => dispatch(appDidLoad(val)),
         setResult: (currentResult , val) => dispatch(setResult(currentResult , val)),
-        endTrivia: (val) => dispatch(endTrivia(val))
+        endTrivia: (val) => dispatch(endTrivia(val)),
+        setTitle: (val) => dispatch(setTitle(val)),
+        startTrivia: (val) => dispatch(startTrivia(val))
     }
 }
 
@@ -48,6 +51,7 @@ class Counter extends Component {
             this.props.setData(data.results);
             this.props.setDataLength(data.results.length);
             this.props.setCurrentQuestion(data.results[0]);
+            this.props.setTitle(this.props.currentCategory);
             console.log(data.results.length);
         })
         .catch('error')
@@ -58,8 +62,10 @@ class Counter extends Component {
         correct?this.props.answerValid():this.props.answerInvalid()
         if(counterVal < data.length){
             this.props.setCurrentQuestion(data[counterVal]);
+            this.props.setTitle(this.props.currentCategory);
         }else{
             this.props.endTrivia(true);
+            this.props.setTitle('Results');
         }
         if(counterVal <= data.length)this.props.setResult(data[counterVal - 1].question , correct);
         console.log(this.props.results)
@@ -67,7 +73,7 @@ class Counter extends Component {
     }
     
     render() {
-        const {counterVal , data, dataLength, currentQuestion, currentCategory, currentCorrectAnswer, correctAnswers, appLoaded, currentDifficulty, results, showResults} = this.props;
+        const {counterVal , data, dataLength, currentQuestion, currentCategory, currentCorrectAnswer, correctAnswers, appLoaded, currentDifficulty, results, showResults, triviaStarted} = this.props;
         return (
             <div className="board">  
                 {
@@ -77,9 +83,9 @@ class Counter extends Component {
                         <p>Loading...</p>
                     </div>
                 }
-                <Card title={showResults?'Results' : currentCategory}
-                      style={{ width: 800, maxWidth: '100%', margin: '50px auto' }}>
-                {!showResults && 
+                <Card className="board-card" title={triviaStarted?this.props.currentTitle:'Trivia Challenge!'}
+                      >
+                {!showResults && triviaStarted &&
                     <div>  
                         <p className="board-primary-text">{currentQuestion && currentQuestion.replace(/&quot;/g , '"').replace(/&#039;/g , "'")}</p>
                         <p className="board-primary-text d-none">{currentCorrectAnswer}</p>
@@ -89,19 +95,42 @@ class Counter extends Component {
                     </div>
                 }
                 {showResults && <div>
-                    <p className="bold">You answered {correctAnswers} out of {dataLength} questions correct </p>
-                    <ul>{results.map(item => <li key={uuidv1()}>{item.val?<Icon className="valid" type="plus-circle" />:<Icon className="invalid" type="minus-circle" />}<span className="board-result-item">{item.currentResult}</span> </li>)}</ul>
+                    <p className="bold font-medium text-left">
+                        {correctAnswers < dataLength / 3 && <Icon className="result-icon" type="frown" style={{color: '#e74c3c'}}/>}
+                        {correctAnswers > dataLength / 3 && correctAnswers < dataLength / 1.5 && <Icon className="result-icon" type="meh" style={{color: '#e0e0e0'}}/>}
+                        {correctAnswers > dataLength / 1.5 && <Icon className="result-icon" type="smile" style={{color: '#2ecc71'}}/>}
+                        <span>You answered {correctAnswers} out of {dataLength} questions correct </span></p>
+                    <ul>{results.map(item => <li key={uuidv1()}>{item.val?<Icon className="valid" type="plus-circle" />:<Icon className="invalid" type="minus-circle" />}<span className="board-result-item">{item.currentResult.replace(/&quot;/g , '"').replace(/&#039;/g , "'")}</span> </li>)}</ul>
                     </div>}
                 {
-                    counterVal <= dataLength && 
+                    !triviaStarted && 
                     <div>
+                        <p className="bold font-medium">You will be presented with 10 True or false Question</p>
+                        <footer>
+                            <Button className="board-button" type="danger" onClick={() => {this.props.startTrivia(true)}}>
+                                START
+                            </Button>
+                        </footer>
+                    </div>
+                }
+                {
+                    triviaStarted && counterVal <= dataLength && 
+                    <footer>
                         <Button className="board-button" type="danger" onClick={() =>       {this.answerQuestion(false, counterVal, data, currentCorrectAnswer)}}>
                             FALSE
                         </Button>
                         <Button className="board-button" type="primary" onClick={() => {this.answerQuestion(true, counterVal, data, currentCorrectAnswer)}}>
                             TRUE
                         </Button>
-                    </div>
+                    </footer>
+                }
+                {
+                    triviaStarted && counterVal > dataLength && 
+                    <footer>
+                        <Button className="board-button" type="primary" onClick={() => {window.location.reload()}}>
+                            PLAY AGAIN
+                        </Button>
+                    </footer>
                 }
                 </Card>
             </div>

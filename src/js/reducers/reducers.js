@@ -1,4 +1,4 @@
-import {INCREMENT, DECREMENT, RESET, SET_DATA, SET_DATA_LENGTH, SET_CURRENT_QUESTION, ANSWER_INVALID , ANSWER_VALID, APP_LOADED, SET_RESULT, SHOW_RESULTS} from '../actions/actions';
+import {INCREMENT, SET_DATA, SET_DATA_LENGTH, SET_CURRENT_QUESTION, ANSWER_INVALID , ANSWER_VALID, APP_LOADED, SET_RESULT, SHOW_RESULTS, SET_TITLE, START_TRIVIA} from '../actions/actions';
 import {combineReducers} from 'redux';
 
 const initialState = {
@@ -19,10 +19,6 @@ const initialState = {
 const counterVal = (state = initialState.counterVal , action) => {
     switch(action.type){
         case(INCREMENT):
-            return action.payload
-        case(DECREMENT):
-            return action.payload
-        case(RESET):
             return action.payload
         default: return state;
         }
@@ -106,6 +102,22 @@ export const showResults = (state = false , action) => {
     }
 }
 
+export const currentTitle = (state = 'Trivia' , action) => {
+    switch(action.type){
+    case(SET_TITLE):
+        return action.payload
+    default: return state
+    }
+}
+
+export const triviaStarted = (state = false , action) => {
+    switch(action.type){
+    case(START_TRIVIA):
+        return action.payload
+    default: return state
+    }
+}
+
 const rootReducer = combineReducers({
         counterVal,
         data,
@@ -117,7 +129,9 @@ const rootReducer = combineReducers({
         correctAnswers,
         appLoaded,
         results,
-        showResults
+        showResults,
+        currentTitle,
+        triviaStarted
 })
 
 export default rootReducer;

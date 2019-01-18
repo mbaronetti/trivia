@@ -1,6 +1,4 @@
 export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
-export const RESET = 'RESET';
 export const SET_DATA = 'SET_DATA';
 export const SET_DATA_LENGTH = 'SET_DATA_LENGTH';
 export const SET_CURRENT_QUESTION = 'SET_CURRENT_QUESTION';
@@ -9,6 +7,8 @@ export const ANSWER_VALID = 'ANSWER_VALID';
 export const APP_LOADED = 'APP_LOADED';
 export const SET_RESULT = 'SET_RESULT';
 export const SHOW_RESULTS = 'SHOW_RESULTS';
+export const SET_TITLE = 'SET_TITLE';
+export const START_TRIVIA = 'START_TRIVIA';
 
 
 export const incrementCounter = (value, incrementVal) => {
@@ -18,21 +18,6 @@ export const incrementCounter = (value, incrementVal) => {
     }
 }
 
-export const decrementCounter = (value, incrementVal) => {
-    return {
-        type: DECREMENT,
-        payload: value - incrementVal
-    }
-}
-
-
-export const resetCounter = () => {
-    return {
-        type: RESET,
-        payload: 0
-    }
-    
-}
 
 export const setDataLength = (dataLength) => {
     return {
@@ -81,6 +66,21 @@ export const endTrivia = (val) => {
         payload: true
     }
 }
+
+export const setTitle = (val) => {
+    return {
+        type: SET_TITLE,
+        payload: val
+    }
+}
+export const startTrivia = (val) => {
+    return {
+        type: START_TRIVIA,
+        payload: val
+    }
+}
+
+
 
 export const setCurrentQuestion = (val) => {
     return {

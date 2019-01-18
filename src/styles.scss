@@ -40,6 +40,31 @@ $invalid: #e74c3c;
             }
         }
     }
+    .board-card{
+        width: 660px;
+        max-width: 100%;
+        margin: 50px auto;
+        min-height: 300px;
+        padding-bottom: 50px;
+        footer{
+            display: block;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            left: 0;
+        }
+    } 
+    .result-icon{
+        font-size: 3em;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+}
+.text-left{
+    text-align: left;
 }
 .valid{
     color: $valid;
@@ -49,6 +74,12 @@ $invalid: #e74c3c;
 }
 .bold{
     font-weight: bold;
+}
+.font-medium{
+    font-size: 1.5em;
+}
+.font-big{
+    font-size: 2em;
 }
 .d-none{
     display: none;
