@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {incrementCounter, setData, setDataLength, setCurrentQuestion, answerValid, answerInvalid, appDidLoad, setResult, endTrivia, setTitle, startTrivia} from '../js/actions/actions';
 import {Button, Icon, Card, Progress} from 'antd';
+import Results from './Results';
 import './../styles.css';
-import uuidv1 from 'uuid';
-
 const url = "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean";
 
 const mapStateToProps = (state) => {
@@ -73,7 +72,7 @@ class Counter extends Component {
     }
     
     render() {
-        const {counterVal , data, dataLength, currentQuestion, currentCategory, currentCorrectAnswer, correctAnswers, appLoaded, currentDifficulty, results, showResults, triviaStarted} = this.props;
+        const {counterVal , data, dataLength, currentQuestion, currentCategory, currentCorrectAnswer, correctAnswers, appLoaded, currentDifficulty, showResults, triviaStarted} = this.props;
         return (
             <div className="board">  
                 {
@@ -94,14 +93,7 @@ class Counter extends Component {
                         <p className="board-seconadry-text d-none">correctAnswers: {correctAnswers}</p>
                     </div>
                 }
-                {showResults && <div>
-                    <p className="bold font-medium text-left">
-                        {correctAnswers < dataLength / 3 && <Icon className="result-icon" type="frown" style={{color: '#e74c3c'}}/>}
-                        {correctAnswers > dataLength / 3 && correctAnswers < dataLength / 1.5 && <Icon className="result-icon" type="meh" style={{color: '#e0e0e0'}}/>}
-                        {correctAnswers > dataLength / 1.5 && <Icon className="result-icon" type="smile" style={{color: '#2ecc71'}}/>}
-                        <span>You answered {correctAnswers} out of {dataLength} questions correct </span></p>
-                    <ul>{results.map(item => <li key={uuidv1()}>{item.val?<Icon className="valid" type="plus-circle" />:<Icon className="invalid" type="minus-circle" />}<span className="board-result-item">{item.currentResult.replace(/&quot;/g , '"').replace(/&#039;/g , "'")}</span> </li>)}</ul>
-                    </div>}
+                {showResults && <Results /> }
                 {
                     !triviaStarted && 
                     <div>
