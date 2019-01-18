@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {incrementCounter, setData, setDataLength, setCurrentQuestion, answerValid, answerInvalid, appDidLoad, setResult, endTrivia, setTitle, startTrivia} from '../js/actions/actions';
-import {Button, Icon, Card, Progress} from 'antd';
+import {Button, Icon, Card, Progress, Modal} from 'antd';
 import Results from './Results';
 import './../styles.css';
 const url = "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean";
@@ -53,7 +53,12 @@ class Counter extends Component {
             this.props.setTitle(this.props.currentCategory);
             console.log(data.results.length);
         })
-        .catch('error')
+        .catch(() => {
+            Modal.error({
+                title: 'Error',
+                content: 'Error occured while loading data.'
+              });
+        })
     }
     answerQuestion = (val, counterVal, data, currentCorrectAnswer) => {
         this.props.incrementCounter(counterVal , 1);

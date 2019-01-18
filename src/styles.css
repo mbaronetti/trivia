@@ -19,37 +19,35 @@
 .App-link {
   color: #61dafb; }
 
-.board {
-  margin-top: 25px; }
-  .board .board-button {
-    margin: 20px 10px 0 10px; }
-  .board ul {
-    list-style-type: none;
-    padding: 0; }
-    .board ul li {
-      text-align: left;
-      margin-bottom: 5px; }
-      .board ul li span {
-        margin-left: 10px; }
-  .board .board-card {
-    width: 660px;
-    max-width: 100%;
-    margin: 50px auto;
-    min-height: 300px;
-    padding-bottom: 50px; }
-    .board .board-card footer {
-      display: block;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      padding: 20px;
-      margin: 0;
-      left: 0; }
-  .board .result-icon {
-    font-size: 3em;
-    vertical-align: middle;
-    margin-right: 10px; }
+.board .board-button {
+  margin: 20px 10px 0 10px; }
+.board ul {
+  list-style-type: none;
+  padding: 0; }
+  .board ul li {
+    text-align: left;
+    margin-bottom: 5px; }
+    .board ul li span {
+      margin-left: 10px; }
+.board .board-card {
+  width: 660px;
+  max-width: 100%;
+  margin: 50px auto;
+  min-height: 300px;
+  padding-bottom: 50px; }
+  .board .board-card footer {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    left: 0; }
+.board .result-icon {
+  font-size: 3em;
+  vertical-align: middle;
+  margin-right: 10px; }
 
 .text-left {
   text-align: left; }
