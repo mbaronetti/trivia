@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Provider} from 'react-redux';
 import Board from './components/Board';
 import store from './js/store/store';
-import './App.css';
+import './styles.css';
 
 
 class App extends Component {

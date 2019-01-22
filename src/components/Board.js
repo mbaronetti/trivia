@@ -4,7 +4,6 @@ import {setData, setDataLength, setCurrentQuestion, appDidLoad, setTitle} from '
 import {Icon, Card, Progress, Modal} from 'antd';
 import Results from './Results';
 import Footer from './Footer';
-import './../styles.css';
 const url = "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean";
 
 const mapStateToProps = (state) => {

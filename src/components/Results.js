@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Icon} from 'antd';
-import './../styles.css';
 import uuidv1 from 'uuid';
 
 const mapStateToProps = (state) => {

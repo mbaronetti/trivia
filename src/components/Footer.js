@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Button} from 'antd';
 import {incrementCounter, setCurrentQuestion, answerValid, answerInvalid, setResult, endTrivia, setTitle, startTrivia} from '../js/actions/actions';
-import './../styles.css';
 
 
 const mapStateToProps = (state) => {
