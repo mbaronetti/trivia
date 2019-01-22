@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {setData, setDataLength, setCurrentQuestion, appDidLoad, setTitle} from '../js/actions/actions';
-import {Button, Icon, Card, Progress, Modal} from 'antd';
+import {Icon, Card, Progress, Modal} from 'antd';
 import Results from './Results';
 import Footer from './Footer';
 import './../styles.css';
@@ -52,7 +52,7 @@ class Counter extends Component {
     }
     
     render() {
-        const {counterVal , currentTitle , dataLength, currentQuestion, currentCategory, appLoaded, showResults, triviaStarted} = this.props;
+        const {counterVal , currentTitle , dataLength, currentQuestion, appLoaded, showResults, triviaStarted} = this.props;
         return (
             <div className="board">  
                 {

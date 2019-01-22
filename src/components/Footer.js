@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Icon, Button} from 'antd';
+import {Button} from 'antd';
 import {incrementCounter, setCurrentQuestion, answerValid, answerInvalid, setResult, endTrivia, setTitle, startTrivia} from '../js/actions/actions';
 import './../styles.css';
-import uuidv1 from 'uuid';
 
 
 const mapStateToProps = (state) => {
@@ -33,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
 class Footer extends Component {
     answerQuestion = (val, counterVal, data, currentCorrectAnswer) => {
         this.props.incrementCounter(counterVal , 1);
-        const correct = val == JSON.parse(currentCorrectAnswer.toLowerCase()) 
+        const correct = val === JSON.parse(currentCorrectAnswer.toLowerCase()) 
         correct?this.props.answerValid():this.props.answerInvalid()
         if(counterVal < data.length){
             this.props.setCurrentQuestion(data[counterVal]);

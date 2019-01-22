@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 
 class Results extends Component {
     render() {
-        const {correctAnswers, dataLength, currentResult, results} = this.props;
+        const {correctAnswers, dataLength, results} = this.props;
         return (
             <div className="board">   
                 {correctAnswers < dataLength / 3 && 
