@@ -53,10 +53,10 @@ export const appDidLoad = (val) => {
     }
 }
 
-export const setResult = (currentResult , val) => {
+export const setResult = (currentResult , val, correctAnswer) => {
     return {
         type: SET_RESULT,
-        payload: {currentResult: currentResult , val: val}
+        payload: {currentResult: currentResult , val: val, correctAnswer: correctAnswer}
     }
 }
 

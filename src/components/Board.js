@@ -82,6 +82,7 @@ class Counter extends Component {
                         !triviaStarted && 
                         <div>
                             <p className="bold font-medium">You will be presented with 10 True or false Question</p>
+                            <p className="bold font-medium">READY?</p>
                         </div>
                     }
                     <Footer />

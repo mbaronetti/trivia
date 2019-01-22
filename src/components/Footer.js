@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
         setCurrentQuestion: (val) => dispatch(setCurrentQuestion(val)),
         answerValid: () => dispatch(answerValid()),
         answerInvalid: () => dispatch(answerInvalid()),
-        setResult: (currentResult , val) => dispatch(setResult(currentResult , val)),
+        setResult: (currentResult , val, correctAnswer) => dispatch(setResult(currentResult , val, correctAnswer)),
         endTrivia: (val) => dispatch(endTrivia(val)),
         setTitle: (val) => dispatch(setTitle(val)),
         startTrivia: (val) => dispatch(startTrivia(val))
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class Footer extends Component {
     answerQuestion = (val, counterVal, data, currentCorrectAnswer) => {
-        this.props.incrementCounter(counterVal , 1);
+        this.props.incrementCounter(counterVal , 1); 
         const correct = val === JSON.parse(currentCorrectAnswer.toLowerCase()) 
         correct?this.props.answerValid():this.props.answerInvalid()
         if(counterVal < data.length){
@@ -41,12 +41,17 @@ class Footer extends Component {
             this.props.endTrivia(true);
             this.props.setTitle('Results');
         }
-        if(counterVal <= data.length)this.props.setResult(data[counterVal - 1].question , correct);
-        console.log(val, counterVal, data, currentCorrectAnswer);
+        if(counterVal <= data.length)this.props.setResult(data[counterVal - 1].question , correct , data[counterVal - 1]['correct_answer']);
     }
     
     render() {
         const {counterVal , data, dataLength, currentCorrectAnswer, triviaStarted} = this.props;
+        if(!triviaStarted)
+            return(
+                <footer>
+                    <Button size="large" className="board-button" type="danger" onClick={() => {this.props.startTrivia(true)}}>START</Button>
+                </footer>
+            );
         if(triviaStarted && counterVal <= dataLength)
         return (
                 <footer>
@@ -63,14 +68,6 @@ class Footer extends Component {
                 <footer>
                     <Button className="board-button" type="primary" onClick={() => {window.location.reload()}}>
                         PLAY AGAIN
-                    </Button>
-                </footer>
-            );
-        if(!triviaStarted)
-            return(
-                <footer>
-                    <Button className="board-button" type="danger" onClick={() => {this.props.startTrivia(true)}}>
-                        START
                     </Button>
                 </footer>
             );

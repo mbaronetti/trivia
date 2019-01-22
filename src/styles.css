@@ -70,6 +70,12 @@
 .d-none {
   display: none; }
 
+.font-italic {
+  font-style: italic; }
+
+.color-gray {
+  color: #aaa; }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg); }

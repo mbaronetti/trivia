@@ -1,6 +1,7 @@
 @import '~antd/dist/antd.css';
 $valid: #2ecc71;
 $invalid: #e74c3c;
+$gray: #aaa;
 .App {
   text-align: center;
 }
@@ -82,6 +83,12 @@ $invalid: #e74c3c;
 }
 .d-none{
     display: none;
+}
+.font-italic{
+    font-style: italic;
+}
+.color-gray{
+    color: $gray;
 }
 @keyframes App-logo-spin {
   from {

@@ -20,14 +20,29 @@ class Results extends Component {
             <div className="board">   
                 {correctAnswers < dataLength / 3 && 
                     <Icon className="result-icon" type="frown" style={{color: '#e74c3c'}}/>}
+            
                 {correctAnswers > dataLength / 3 && correctAnswers < dataLength / 1.5 && 
                     <Icon className="result-icon" type="meh" style={{color: '#e0e0e0'}}/>}
+            
                 {correctAnswers > dataLength / 1.5 && 
                     <Icon className="result-icon" type="smile" style={{color: '#2ecc71'}}/>}
+            
                 <p className="bold font-medium">
-                    You answered {correctAnswers} out of {dataLength} questions correct
+                    You answered {correctAnswers} out of {dataLength} questions correct.
                 </p>
-                <ul>{results.map(item => <li key={uuidv1()}>{item.val?<Icon className="valid" type="plus-circle" />:<Icon className="invalid" type="minus-circle" />}<span className="board-result-item">{item.currentResult.replace(/&quot;/g , '"').replace(/&#039;/g , "'")}</span> </li>)}</ul>
+                <ul>{results.map(item => <li key={uuidv1()}>
+                    {
+                        item.val ? <Icon className="valid" type="plus-circle" />:<Icon className="invalid" type="minus-circle" />
+                    }
+                    <span className="board-result-item">
+                    {
+                        item.currentResult.replace(/&quot;/g , '"').replace(/&#039;/g , "'")
+                    }
+                    </span>
+                        <p className="font-italic color-gray">Correct answer: {item.correctAnswer}</p>
+                    </li>)
+                    }
+                </ul>
             </div>
             
         );
