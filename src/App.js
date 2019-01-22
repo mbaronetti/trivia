@@ -6,10 +6,6 @@ import logo from './logo.svg';
 import './App.css';
 
 
-console.log(store);
-console.log(store.getState());
-
-//store.subscribe(() => console.log(store.getState()))
 class App extends Component {
     render() {
         return (
